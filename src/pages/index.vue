@@ -1,17 +1,27 @@
 <template>
-  <v-container class="d-flex flex-column align-center justify-center h-screen">
-    <v-card class="pa-6 w-50">
-      <v-card-title class="text-center">Login dengan Google</v-card-title>
-      <v-card-text v-if="user">
-        <p>Halo, {{ user.name }}</p>
-        <p>Email: {{ user.email }}</p>
-        <v-img v-if="user.photoURL" :src="user.photoURL" alt="Profile" width="100" class="rounded-circle"></v-img>
-      </v-card-text>
-      <v-card-actions class="d-flex justify-center">
-        <v-btn v-if="!user" @click="login" color="primary">Login dengan Google</v-btn>
-        <v-btn v-else @click="logoutUser" color="error">Logout</v-btn>
-      </v-card-actions>
-    </v-card>
+  <v-container fluid class="d-flex pa-0">
+    <!-- Bagian Kiri (Gambar) -->
+    <v-container class="d-flex align-center justify-center bg-primary h-screen w-50">
+      <v-img :src="landingPageImage" alt="Login Image" contain max-height="500" />
+    </v-container>
+
+    <!-- Bagian Kanan (Form Login) -->
+    <v-container class="d-flex align-center justify-center bg-white h-screen w-50">
+      <v-card class="pa-6" width="400">
+        <v-card-title class="text-center my-4">Selamat Datang</v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-text-field label="Email" v-model="email" type="email" required></v-text-field>
+            <v-text-field label="Password" v-model="password" type="password" required></v-text-field>
+            <v-btn type="submit" block color="primary">Login</v-btn>
+          </v-form>
+          <v-divider class="my-8">atau</v-divider>
+          <v-btn block color="secondary" @click="signInWithGoogle">
+            <span class="flex-grow-1 text-center">Login dengan Google</span>
+          </v-btn>
+        </v-card-text>
+      </v-card>
+    </v-container>
   </v-container>
 </template>
 
@@ -20,26 +30,8 @@ import { ref } from "vue";
 import { signInWithGoogle, logout, db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import type { UserModel } from "@/models/UserModel";
+import landingPageImage from "@/assets/landing_page.svg";
 
-const user = ref<UserModel | null>(null);
-
-const fetchUserData = async (uid: string) => {
-  const userRef = doc(db, "users", uid);
-  const docSnap = await getDoc(userRef);
-  if (docSnap.exists()) {
-    user.value = docSnap.data() as UserModel;
-  }
-};
-
-const login = async () => {
-  const loggedInUser = await signInWithGoogle();
-  if (loggedInUser) {
-    await fetchUserData(loggedInUser.uid);
-  }
-};
-
-const logoutUser = async () => {
-  await logout();
-  user.value = null;
-};
+const email = ref("");
+const password = ref("");
 </script>
