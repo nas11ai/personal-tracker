@@ -41,9 +41,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { signInWithGoogle } from "@/firebase";
-// import { doc, getDoc } from "firebase/firestore";
-// import type { UserModel } from "@/models/UserModel";
+import { signInWithGoogle } from "@/backend/services/authService";
 import landingPageImage from "@/assets/landing_page.svg";
 
 const email = ref("");
