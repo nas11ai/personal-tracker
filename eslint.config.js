@@ -5,9 +5,18 @@
  */
 
 import pluginVue from 'eslint-plugin-vue'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
+import vueTsEslintConfig from '@vue/eslint-config-typescript';;
+import prettier from "eslint-config-prettier";
 
 export default [
+  {
+    extends: [
+      "eslint:recommended",
+      "plugin:vue/vue3-recommended",
+      "plugin:@typescript-eslint/recommended",
+      prettier,
+    ],
+  },
   {
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],

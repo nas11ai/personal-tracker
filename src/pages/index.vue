@@ -1,21 +1,35 @@
 <template>
   <v-container fluid class="d-flex pa-0">
     <!-- Bagian Kiri (Gambar) -->
-    <v-container class="d-flex align-center justify-center bg-primary h-screen w-50">
-      <v-img :src="landingPageImage" alt="Login Image" contain max-height="500" />
+    <v-container
+      class="d-none d-sm-flex align-center justify-center bg-primary h-screen w-50"
+    >
+      <v-img
+        :src="landingPageImage"
+        alt="Login Image"
+        contain
+        max-height="500"
+      />
     </v-container>
 
     <!-- Bagian Kanan (Form Login) -->
-    <v-container class="d-flex align-center justify-center bg-surface h-screen w-50">
+    <v-container
+      class="d-flex align-center justify-center bg-surface h-screen w-100 sm-w-50"
+    >
       <v-card class="pa-6 bg-white" width="400">
-        <v-card-title class="text-center my-4">Selamat Datang</v-card-title>
+        <v-card-title class="text-center my-4"> Selamat Datang </v-card-title>
         <v-card-text>
           <v-form>
-            <v-text-field label="Email" v-model="email" type="email" required></v-text-field>
-            <v-text-field label="Password" v-model="password" type="password" required></v-text-field>
-            <v-btn type="submit" block color="primary">Login</v-btn>
+            <v-text-field v-model="email" label="Email" type="email" required />
+            <v-text-field
+              v-model="password"
+              label="Password"
+              type="password"
+              required
+            />
+            <v-btn type="submit" block color="primary"> Login </v-btn>
           </v-form>
-          <v-divider class="my-8">atau</v-divider>
+          <v-divider class="my-8"> atau </v-divider>
           <v-btn block color="secondary" @click="signInWithGoogle">
             <span class="flex-grow-1 text-center">Login dengan Google</span>
           </v-btn>
@@ -27,9 +41,9 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { signInWithGoogle, logout, db } from "@/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import type { UserModel } from "@/models/UserModel";
+import { signInWithGoogle } from "@/firebase";
+// import { doc, getDoc } from "firebase/firestore";
+// import type { UserModel } from "@/models/UserModel";
 import landingPageImage from "@/assets/landing_page.svg";
 
 const email = ref("");
