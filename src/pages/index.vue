@@ -6,8 +6,8 @@
     </v-container>
 
     <!-- Bagian Kanan (Form Login) -->
-    <v-container class="d-flex align-center justify-center bg-white h-screen w-50">
-      <v-card class="pa-6" width="400">
+    <v-container class="d-flex align-center justify-center bg-surface h-screen w-50">
+      <v-card class="pa-6 bg-white" width="400">
         <v-card-title class="text-center my-4">Selamat Datang</v-card-title>
         <v-card-text>
           <v-form>
