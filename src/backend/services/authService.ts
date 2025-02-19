@@ -15,7 +15,7 @@ export const signInWithGoogle = async (): Promise<void> => {
       await saveUserToFirestore(result.user);
     }
 
-    router.push("/auth/register");
+    router.push("/home");
   } catch (error) {
     console.error("Error saat login:", error);
   }
